@@ -1,10 +1,10 @@
 import re
 import itertools
 
-# Define a function to load grammar from file
+# Function to load grammar from file
 def load_grammar(file_path):
     grammar = {}
-    # Modified regex to support Unicode characters and match the provided grammar pattern
+    # Regex to match grammar lines
     pattern = re.compile(r"^[A-Z𝐴-𝑍𝑎-𝑧] → ([0-9A-Z𝐴-𝑍𝑎-𝑧]+(\|[0-9A-Z𝐴-𝑍𝑎-𝑧]+)*)|ε$")
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -20,7 +20,7 @@ def load_grammar(file_path):
         return None
     return grammar
 
-# Define a function to find nullable symbols
+# Function to find nullable symbols
 def find_nullable_symbols(grammar):
     nullable = set()
     updated = True
@@ -34,7 +34,7 @@ def find_nullable_symbols(grammar):
                         updated = True
     return nullable
 
-# Define a function to eliminate epsilon productions
+# Function to eliminate epsilon productions
 def eliminate_epsilon_productions(grammar):
     nullable = find_nullable_symbols(grammar)
     new_grammar = {}
